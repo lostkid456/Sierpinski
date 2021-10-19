@@ -46,7 +46,7 @@ def draw_triangle(p1, p2, p3, color, line_width, screen):
 # The function should return coordinates--a list of two floats--that locate the
 # point that is midway between p1 and p2.
 def find_midpoint(p1, p2):
-    return (p1+p2)/2
+    return ((p1[0]+p2[0]) / 2, (p1[1] + p2[1]) / 2)
 
 # THIS FUNCTION MUST BE COMPLETED BY THE STUDENT
 # This function draw a tringle, and then recursively calls it self to ensure
@@ -63,14 +63,12 @@ def find_midpoint(p1, p2):
 def sierpinski(degree, p1, p2, p3, color, line_width, screen):
     draw_triangle(p1,p2,p3,color,line_width,screen)
     if(degree>0):
-        new_h=height/2
-        new_w=width/2
         new_p1=find_midpoint(p1,p2)
         new_p2=find_midpoint(p2,p3)
         new_p3=find_midpoint(p1,p3)
-        sierpinski(degree-1,,new_h,new_w,color,line_width,screen)
-        sierpinski(degree-1,,,color,line_width,screen)
-        sierpinski(degree-1,,,color,line_width,screen)
+        sierpinski(degree-1,p1,new_p1,new_p3,color,line_width,screen)
+        sierpinski(degree-1,p2,new_p1,new_p2,color,line_width,screen)
+        sierpinski(degree-1,p3,find_midpoint(p3,p2),new_p3,color,line_width,screen)
 
 def main():
     # This call is necessary to initialize the resources in the pygame library.
